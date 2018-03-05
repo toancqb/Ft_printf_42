@@ -6,8 +6,25 @@ https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/fo
 https://www.codingunit.com/printf-format-specifiers-format-conversions-and-formatted-output
 
 This is from 42Starfleet, thanks very much !
-
 /*
+**	Source: https://www-user.tu-chemnitz.de/~heha/petzold/ch02c.htm
+**	A note on capital letter (wide) conversion types: "Nothing about Unicode
+**	or wide characters alters the meaning of the char data type in C. The char
+**	continues to indicate 1 byte of storage, and sizeof(char) continues to
+**	return 1. In theory, a byte in C can be greater than 8 bits, but for most
+**	of us, a byte (and hence a char) is 8 bits wide.
+**
+**	Wide characters in C are based on the "wchar_t" data type, which is defined
+**	in several headers files, including "<wchar.h>", like so:
+**	"typedef unsigned short wchar_t;"
+**
+**	Thus, the "wchar_t" data type is the same as an unsigned short integer:
+**	16 bits wide.
+**
+**	Source: The C Programming Language, 2nd Edition (Dennis Ritchie), page 137
+**	&&
+**	Source: C Primer Plus 6th Edition, page 113
+**
 **	*******************************Mandatory Part*******************************
 **	Types of conversions:
 **
