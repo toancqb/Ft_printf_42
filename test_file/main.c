@@ -84,12 +84,25 @@
 
 void ft_test_conv()
 {
-	printf("format %   s %ld\n", "abc", 123);
+	int number    =  5;
+      char *pointer = "little";
+
+      printf("Here is a number-%-4d-and a-%.4s-word.\n", number, pointer);
+
+	printf("format %---s %d\n", "abc", -16);
+	printf("%0.5d \n", number);
+	printf("%10d \n", number);
+	printf("%-10d \n", number);
+  printf("%010d \n", number);
+  printf("%-#10x \n", number);
+  printf("%#x \n", number);
+
 }
 
 int	main(int argc, char *argv[])
 {
 
 	ft_test_conv();
+
 	return (0);
 }

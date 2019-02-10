@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_handle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/10 15:38:58 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/10 15:39:00 by qtran            ###   ########.fr       */
+/*   Created: 2019/02/10 15:39:18 by qtran             #+#    #+#             */
+/*   Updated: 2019/02/10 15:39:19 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int main(int argc, char *argv[])
+void	process_main(char **fmt_ptr, va_list args, int *c_printed_ptr)
 {
-	ft_printf(argv[1]);
+	t_env *vn;
+
+	vn = init_env();
 }
