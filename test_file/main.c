@@ -97,6 +97,7 @@ void ft_test_conv()
   printf("%-#10x \n", number);
   printf("%#x \n", number);
 
+	printf("%d \n", &number);
 }
 
 int	main(int argc, char *argv[])

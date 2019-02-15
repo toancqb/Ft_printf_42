@@ -15,10 +15,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
-
-typedef unsigned char bool;
+typedef unsigned char t_bool;
 
 typedef struct s_env
 {
@@ -26,18 +26,29 @@ typedef struct s_env
     char *conv_type;
     int width;
     int precision;
-    bool sharp;
-    bool zero;
-    bool minus;
-    bool plus;
-    bool space;
-    bool point;
+    t_bool sharp;
+    t_bool zero;
+    t_bool minus;
+    t_bool plus;
+    t_bool space;
+    t_bool point;
 } t_env;
 
 t_env *init_env(); void test_display_env(t_env *vn); //
-bool is_flag(char c);
-bool is_conv_type(char c);
-bool is_conv(char c);
+t_bool is_flag(char c);
+t_bool is_conv_type(char c);
+t_bool is_conv(char c);
+void set_conv(t_env *vn, char c);
+void intdec_to_hex(char c, int d, char **str);
+void intdec_to_oct(int d, char **str);
+void print_s(va_list args, int *i);
+void print_d(va_list args, int *i);
+void print_c(va_list args, int *i);
+void print_p(va_list args, int *i);
+void print_xX(t_env *vn, va_list args, int *i);
+void print_o(t_env *vn, va_list args, int *i);
+
+void ft_error(char *str_error);
 void process_main(char **fmt_ptr, va_list args, int *c_printed_ptr);
 
 

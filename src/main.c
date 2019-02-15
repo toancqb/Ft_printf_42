@@ -14,5 +14,13 @@
 
 int main(int argc, char *argv[])
 {
-	ft_printf(argv[1]);
+	char *str;
+	int i;
+	int nbr = 30;
+
+	str = "ahihi";
+	i = ft_printf("abc %s %c %d %x\n", str, 'g', nbr, nbr);
+	printf("printed %d %d %x\n", i, nbr, nbr);
+
+	return (0);
 }

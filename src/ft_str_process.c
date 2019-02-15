@@ -12,3 +12,21 @@
 
 #include "../includes/ft_printf.h"
 
+t_bool is_conv(char c)
+{
+	char *s;
+
+	s = "cspdiouxX";
+	while (*s)
+	{
+		if (c == *s)
+			return (1);
+		s++;
+	}
+	return (0);
+}
+
+void set_conv(t_env *vn, char c)
+{
+	vn->conv = c;
+}
