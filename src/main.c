@@ -16,11 +16,14 @@ int main(int argc, char *argv[])
 {
 	char *str;
 	int i;
-	int nbr = 30;
+	long long nbr = 1075642223238565640;
 
 	str = "ahihi";
-	i = ft_printf("abc %s %c %d %x\n", str, 'g', nbr, nbr);
-	printf("printed %d %d %x\n", i, nbr, nbr);
+	i = ft_printf("abc %#llo %#lx\n", nbr, 0);
+
+	printf("printed %d %#llo %#x\n", i, nbr, 0);
+
+	//printf("%d\n", ft_atoi("0.2"));
 
 	return (0);
 }

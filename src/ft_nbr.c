@@ -1,9 +1,9 @@
 #include "../includes/ft_printf.h"
 
-void intdec_to_hex(char c, int d, char **str)
+void intdec_to_hex(char c, uintmax_t d, char **str)
 {
-  int d_cpy;
-  int len;
+  uintmax_t d_cpy;
+  long long len;
 
   d_cpy = d;
   len = (d == 0) ? 1 : 0;
@@ -27,10 +27,10 @@ void intdec_to_hex(char c, int d, char **str)
   }
 }
 
-void intdec_to_oct(int d, char **str)
+void intdec_to_oct(uintmax_t d, char **str)
 {
-  int d_cpy;
-  int len;
+  uintmax_t d_cpy;
+  long long len;
 
   d_cpy = d;
   len = (d == 0) ? 1 : 0;
