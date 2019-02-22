@@ -16,12 +16,21 @@ int main(int argc, char *argv[])
 {
 	char *str;
 	int i;
-	long long nbr = 1075642223238565640;
+	float f = 51923.141593;
+	int d = 1234567;
+	//long long nbr = 1075642223238565640;
 
 	str = "ahihi";
-	i = ft_printf("abc %#llo %#lx\n", nbr, 0);
+	//i = ft_printf("abc %#llo %p\n", nbr, &nbr);
 
-	printf("printed %d %#llo %#x\n", i, nbr, 0);
+	i = ft_printf("---%-10.1f---%-+ 10.0f\n", f, f);
+	printf("printed %d \n---%-10.1f---%-+ 10.0f\n", i, f, f);
+
+	i = ft_printf("integer %%d: %d %+o\n", d, d);
+	printf("printed %d integer %%d: %d %+o\n", i, d, d);
+
+	i = ft_printf("___%0 4c___\n", 'T');
+	printf("___%0 4c___printed %d \n", 'T', i);
 
 	//printf("%d\n", ft_atoi("0.2"));
 

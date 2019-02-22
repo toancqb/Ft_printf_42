@@ -29,6 +29,8 @@ void processing(t_env *vn, va_list args, int *i)
 		print_xX(vn, args, i);
 	else if (vn->conv == 'o')
 		print_o(vn, args, i);
+	else if (vn->conv == 'f')
+		print_f(vn, args, i);
 	else if (vn->conv == '%')
 		print_percent(i);
 }

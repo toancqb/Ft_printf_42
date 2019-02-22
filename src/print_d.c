@@ -5,6 +5,8 @@ int ft_nbr_len_intmax(intmax_t d)
 	int len;
 
 	len = 0;
+	if (d < 0)
+		len++;
 	if (d == 0)
 		return (1);
 	while (d != 0)
@@ -15,28 +17,30 @@ int ft_nbr_len_intmax(intmax_t d)
 	return (len);
 }
 
-void	ft_putnbr_intmax(intmax_t n)
+void	ft_putnbr_to_buf_intmax(char **buffer, intmax_t n, int index)
 {
 	intmax_t		lli;
 
 	lli = n;
 	if (lli < 0)
 	{
-		ft_putchar('-');
+		(*buffer)[0] = '-';
 		lli = -lli;
 	}
 	if (lli > 9)
 	{
-		ft_putnbr_intmax(lli / 10);
-		ft_putchar((lli % 10) + '0');
+		ft_putnbr_to_buf_intmax(buffer, lli / 10, index - 1);
+		(*buffer)[index] = (lli % 10) + '0';
 	}
 	else
-		ft_putchar(lli + '0');
+		(*buffer)[index] = lli + '0';
 }
 
 void print_d(t_env *vn, va_list args, int *i)
 {
 	intmax_t d;
+	char *buffer;
+	int len;
 
 	d = va_arg(args, intmax_t);
 	if (vn->conv_type == NULL)
@@ -49,6 +53,15 @@ void print_d(t_env *vn, va_list args, int *i)
 		d = (short)d;
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (signed char)d;
-	ft_putnbr_intmax(d);
-	*i += ft_nbr_len_intmax(d);
+	len = ft_nbr_len_intmax(d);
+	buffer = (char*)malloc(sizeof(char) * (len + 1));
+	buffer[len] = '\0';
+	ft_putnbr_to_buf_intmax(&buffer, d, len - 1);
+	if (d > 0 && vn->plus)
+    pad_right(&buffer, 1, '+');
+  else if (d > 0 && vn->space)
+    pad_right(&buffer, 1, ' ');
+	ft_putstr(buffer);
+	*i += ft_strlen(buffer);
+	free(buffer);
 }

@@ -2,10 +2,11 @@
 
 void print_c(t_env *vn, va_list args, int *i)
 {
-	char *str;
+	char *buffer;
 
-	str = ft_strnew(1);
-	str[0] = va_arg(args, int);
-	ft_putstr(str);
-	*i += ft_strlen(str);
+	buffer = ft_strnew(1);
+	buffer[0] = va_arg(args, int);
+	flag_s(vn, &buffer);
+	ft_putstr(buffer);
+	*i += ft_strlen(buffer);
 }

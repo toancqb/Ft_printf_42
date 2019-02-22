@@ -15,28 +15,30 @@ int ft_nbr_len_uintmax(uintmax_t d)
 	return (len);
 }
 
-void	ft_putnbr_uintmax(uintmax_t n)
+void	ft_putnbr_to_buf_uintmax(char **buffer, uintmax_t n, int index)
 {
 	uintmax_t		lli;
 
 	lli = n;
 	if (lli < 0)
 	{
-		ft_putchar('-');
+		(*buffer)[index--] = '-';
 		lli = -lli;
 	}
 	if (lli > 9)
 	{
-		ft_putnbr_uintmax(lli / 10);
-		ft_putchar((lli % 10) + '0');
+		ft_putnbr_to_buf_uintmax(buffer, lli / 10, index - 1);
+		(*buffer)[index] = (lli % 10) + '0';
 	}
 	else
-		ft_putchar(lli + '0');
+		(*buffer)[index] = lli + '0';
 }
 
 void print_uU(t_env *vn, va_list args, int *i)
 {
 	uintmax_t d;
+	char *buffer;
+	int len;
 
   if (vn->conv == 'U')
     vn->conv_type = ft_strdup("l");
@@ -51,6 +53,11 @@ void print_uU(t_env *vn, va_list args, int *i)
 		d = (unsigned short)d;
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (unsigned char)d;
-	ft_putnbr_uintmax(d);
-	*i += ft_nbr_len_uintmax(d);
+	len = ft_nbr_len_intmax(d);
+	buffer = (char*)malloc(sizeof(char) * (len + 1));
+	buffer[len] = '\0';
+	ft_putnbr_to_buf_uintmax(&buffer, d, len - 1);
+	ft_putstr(buffer);
+	*i += ft_strlen(buffer);
+	free(buffer);
 }

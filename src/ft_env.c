@@ -51,3 +51,9 @@ void test_display_env(t_env *vn) //
   ft_putstr(vn->conv_type); ft_putstr("\n");
   ft_putchar(vn->conv); ft_putstr("\n");
 }
+
+void ft_error(char *str_error)
+{
+	perror(str_error);
+	exit(1);
+}

@@ -11,4 +11,4 @@
 # **************************************************************************** #
 
 all:
-	gcc src/main.c src/ft_*.c libft/libft.a -o ft_printf
+	gcc src/main.c src/ft_*.c src/print*.c libft/libft.a -o ft_printf

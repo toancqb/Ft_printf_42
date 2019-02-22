@@ -74,14 +74,18 @@ void set_flag(t_env *vn, char c)
 		vn->minus = 1;
 		vn->zero = 0;
 	}
-	if (c == '+')
-		vn->plus = 1;
+	if (c == ' ')
+		vn->space = 1;
 	if (c == '#')
 		vn->sharp = 1;
 	if (c == '0' && vn->minus == 0)
 		vn->zero = 1;
-	if (c == ' ')
-		vn->space = 1;
+	if (c == '+')
+	{
+		vn->plus = 1;
+		if (vn->conv == 'd' || vn->conv == 'f')
+			vn->space = 0;
+	}
 }
 
 t_bool set_conv_type(t_env *vn, char **fmt)

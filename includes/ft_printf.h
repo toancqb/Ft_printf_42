@@ -20,6 +20,7 @@
 # include "../libft/libft.h"
 
 typedef unsigned char t_bool;
+typedef long long t_long;
 
 typedef struct s_env
 {
@@ -36,7 +37,11 @@ typedef struct s_env
 } t_env;
 
 t_env *init_env(); void test_display_env(t_env *vn); //
+char *ft_strnew_filled_char(int len, char c);
+void flag_s(t_env *vn, char **str);
 void sharp_xXo(char *str1, char **str2);
+void pad_left(char **buffer, int len, char c);
+void pad_right(char **bufer, int len, char c);
 t_bool is_flag(char c);
 t_bool is_width_precision(char c);
 t_bool is_conv_type(char c);
@@ -54,6 +59,7 @@ void print_c(t_env *vn, va_list args, int *i);
 void print_p(t_env *vn, va_list args, int *i);
 void print_xX(t_env *vn, va_list args, int *i);
 void print_o(t_env *vn, va_list args, int *i);
+void print_f(t_env *vn, va_list args, int *i);
 void print_percent(int *i);
 
 void ft_error(char *str_error);
