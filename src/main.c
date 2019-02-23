@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
 	i = ft_printf("---%-10.1f---%-+ 10.0f\n", f, f);
 	printf("printed %d \n---%-10.1f---%-+ 10.0f\n", i, f, f);
 
-	i = ft_printf("integer %%d: %d %+o\n", d, d);
-	printf("printed %d integer %%d: %d %+o\n", i, d, d);
+	i = ft_printf("integer %%d: -%010.0d- %+o\n", d, d);
+	printf("integer %%d: -%010.0d- %+o printed %d \n", d, d, i);
 
 	i = ft_printf("___%0 4c___\n", 'T');
 	printf("___%0 4c___printed %d \n", 'T', i);

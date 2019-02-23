@@ -30,6 +30,7 @@ typedef struct s_env
     int precision;
     t_bool sharp;
     t_bool zero;
+    t_bool flag_zero;
     t_bool minus;
     t_bool plus;
     t_bool space;

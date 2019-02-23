@@ -42,7 +42,7 @@ t_bool is_flag(char c)
 
 t_bool is_width_precision(char c)
 {
-	return (ft_isdigit(c));
+	return (ft_isdigit(c) || (t_bool)(c == '.'));
 }
 
 void set_width_precision(t_env *vn, char **fmt)
