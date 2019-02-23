@@ -12,10 +12,27 @@
 
 #include "../includes/ft_printf.h"
 
+void sharp_xXo(char *str1, char **str2)
+{
+  char *tmp;
+
+  tmp = *str2;
+  if (ft_strcmp(*str2, "0"))
+  {
+    *str2 = ft_strjoin(str1, tmp);
+    free(tmp);
+  }
+}
+
 void flag_unsigned_nbr(t_env *vn, char **buffer)
 {
 	int len;
 
+	if (!ft_strcmp(*buffer, "0"))
+	{
+		free(*buffer);
+		*buffer = ft_strdup("");
+	}
 	len = ft_strlen(*buffer);
 	if (vn->width > len)
 	{

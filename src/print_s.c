@@ -15,8 +15,10 @@
 void print_s(t_env *vn, va_list args, int *i)
 {
 	char *buffer;
+	char *tmp;
 
-	buffer = va_arg(args, char*);
+	tmp = va_arg(args, char*);
+	buffer = ft_strdup(tmp);
 	flag_sc(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);

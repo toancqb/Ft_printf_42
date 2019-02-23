@@ -12,18 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-void sharp_xXo(char *str1, char **str2)
-{
-  char *tmp;
-
-  tmp = *str2;
-  if (ft_strcmp(*str2, "0"))
-  {
-    *str2 = ft_strjoin(str1, tmp);
-    free(tmp);
-  }
-}
-
 char *ft_strnew_filled_char(int len, char c)
 {
   char *str;
@@ -66,7 +54,7 @@ void flag_sc(t_env *vn, char **str)
 	int len;
 	char c;
 
-	if (vn->precision > ft_strlen(*str))
+	if (vn->precision && vn->precision < (int)ft_strlen(*str))
 	{
 		tmp = ft_strdup(*str);
 		*str = ft_strsub(tmp, 0, vn->precision);
@@ -80,6 +68,6 @@ void flag_sc(t_env *vn, char **str)
 		if (!vn->minus)
 			pad_right(str, len, c);
 		else
-			pad_right(str, len, c);
+			pad_left(str, len, c);
 	}
 }

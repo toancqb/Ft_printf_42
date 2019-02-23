@@ -24,13 +24,13 @@ printf("\n----------\n");
 
 printf("\n----------\n");
 
-	ft_printf("%#08x\n", 42);
-	printf("%#08x", 42);
+	ft_printf("%#04x\n", 42);
+	printf("%#04x", 42);
 
 printf("\n----------\n");
 
   ft_printf("%10s is a string\n", "this");
-	ft_printf("%10s is a string", "this");
+	printf("%10s is a string", "this");
 
 printf("\n----------\n");
 
@@ -41,6 +41,10 @@ printf("\n----------\n");
 
 	//ft_printf("%lld\n", -9223372036854775808);
 	//printf("%lld\n", -9223372036854775808);
+
+printf("\n----------\n");
+
+
 
 printf("\n----------\n");
 	return (0);

@@ -12,6 +12,55 @@
 
 #include "../includes/ft_printf.h"
 
+void sharp_xX(t_env *vn, char **buffer)
+{
+  char *tmp;
+	int len;
+
+  if (ft_strcmp(*buffer, "0"))
+  {
+    len = ft_strlen(*buffer) - 2;
+		if (vn->width > len)
+		{
+			if (vn->zero && !vn->point)
+				pad_right(buffer, vn->width - len, '0');
+			else if (!vn->minus)
+				pad_right(buffer, vn->width - len, ' ');
+			else if (vn->minus)
+				pad_left(buffer, vn->width - len, ' ');
+		}
+		tmp = *buffer;
+		*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
+    free(tmp);
+  }
+	else
+	{
+		free(*buffer);
+		*buffer = ft_strdup("");
+	}
+}
+
+void flag_x(t_env *vn, char **buffer)
+{
+	int len;
+
+	if (!ft_strcmp(*buffer, "0"))
+	{
+		free(*buffer);
+		*buffer = ft_strdup("");
+	}
+	len = ft_strlen(*buffer);
+	if (vn->width > len)
+	{
+		if (vn->zero && !vn->point)
+			pad_right(buffer, vn->width - len, '0');
+		else if (!vn->minus)
+			pad_right(buffer, vn->width - len, ' ');
+		else if (vn->minus)
+			pad_left(buffer, vn->width - len, ' ');
+	}
+}
+
 void print_xX(t_env *vn, va_list args, int *i)
 {
 	char *buffer;
@@ -29,9 +78,12 @@ void print_xX(t_env *vn, va_list args, int *i)
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (unsigned char)d;
 	intdec_to_hex(vn->conv, d, &buffer);
+	//if (vn->sharp)
+	//	vn->conv == 'x' ? sharp_xX("0x", &buffer) : sharp_xX("0X", &buffer);
 	if (vn->sharp)
-		vn->conv == 'x' ? sharp_xXo("0x", &buffer) : sharp_xXo("0X", &buffer);
-	flag_unsigned_nbr(vn, &buffer);
+		sharp_xX(vn, &buffer);
+	else
+		flag_x(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
 	free(buffer);
