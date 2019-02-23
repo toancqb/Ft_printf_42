@@ -110,6 +110,7 @@ t_bool set_conv_type(t_env *vn, char **fmt)
 	}
 	free(str);
 	vn->conv_type = NULL;
+	return (0);
 }
 
 void set_conv(t_env *vn, char c)

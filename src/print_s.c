@@ -1,35 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_s.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/23 17:42:11 by qtran             #+#    #+#             */
+/*   Updated: 2019/02/23 17:42:15 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
-
-void flag_s(t_env *vn, char **str)
-{
-	char *tmp;
-	int len;
-	char c;
-
-	if (vn->precision)
-	{
-		tmp = ft_strdup(*str);
-		*str = ft_strsub(tmp, 0, vn->precision);
-		free(tmp);
-	}
-	c = ' ';
-	len = ft_strlen(*str);
-	if (vn->width > len)
-	{
-		len = vn->width - len;
-		if (!vn->minus)
-			pad_right(str, len, c);
-		else
-			pad_right(str, len, c);
-	}
-}
 
 void print_s(t_env *vn, va_list args, int *i)
 {
 	char *buffer;
 
 	buffer = va_arg(args, char*);
-	flag_s(vn, &buffer);
+	flag_sc(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
 }

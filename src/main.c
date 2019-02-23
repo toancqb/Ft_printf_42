@@ -12,27 +12,36 @@
 
 #include "../includes/ft_printf.h"
 
-int main(int argc, char *argv[])
+int main(void)
 {
-	char *str;
-	int i;
-	float f = 51923.141593;
-	int d = 1234567;
-	//long long nbr = 1075642223238565640;
+	ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
+	printf("@moulitest: %#.x %#.0x", 0, 0);
 
-	str = "ahihi";
-	//i = ft_printf("abc %#llo %p\n", nbr, &nbr);
+printf("\n----------\n");
 
-	i = ft_printf("---%-10.1f---%-+ 10.0f\n", f, f);
-	printf("printed %d \n---%-10.1f---%-+ 10.0f\n", i, f, f);
+	ft_printf("@moulitest: %5.x %5.0x\n", 0, 0);
+	printf("@moulitest: %5.x %5.0x", 0, 0);
 
-	i = ft_printf("integer %%d: -%010.0d- %+o\n", d, d);
-	printf("integer %%d: -%010.0d- %+o printed %d \n", d, d, i);
+printf("\n----------\n");
 
-	i = ft_printf("___%0 4c___\n", 'T');
-	printf("___%0 4c___printed %d \n", 'T', i);
+	ft_printf("%#08x\n", 42);
+	printf("%#08x", 42);
 
-	//printf("%d\n", ft_atoi("0.2"));
+printf("\n----------\n");
 
+  ft_printf("%10s is a string\n", "this");
+	ft_printf("%10s is a string", "this");
+
+printf("\n----------\n");
+
+	ft_printf("%10s is a string\n", "");
+	printf("%10s is a string", "");
+
+printf("\n----------\n");
+
+	//ft_printf("%lld\n", -9223372036854775808);
+	//printf("%lld\n", -9223372036854775808);
+
+printf("\n----------\n");
 	return (0);
 }

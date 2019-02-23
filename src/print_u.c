@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_u.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/23 17:42:41 by qtran             #+#    #+#             */
+/*   Updated: 2019/02/23 17:42:43 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 int ft_nbr_len_uintmax(uintmax_t d)
@@ -20,11 +32,6 @@ void	ft_putnbr_to_buf_uintmax(char **buffer, uintmax_t n, int index)
 	uintmax_t		lli;
 
 	lli = n;
-	if (lli < 0)
-	{
-		(*buffer)[index--] = '-';
-		lli = -lli;
-	}
 	if (lli > 9)
 	{
 		ft_putnbr_to_buf_uintmax(buffer, lli / 10, index - 1);
@@ -53,10 +60,11 @@ void print_uU(t_env *vn, va_list args, int *i)
 		d = (unsigned short)d;
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (unsigned char)d;
-	len = ft_nbr_len_intmax(d);
+	len = ft_nbr_len_uintmax(d);
 	buffer = (char*)malloc(sizeof(char) * (len + 1));
 	buffer[len] = '\0';
 	ft_putnbr_to_buf_uintmax(&buffer, d, len - 1);
+	flag_unsigned_nbr(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
 	free(buffer);

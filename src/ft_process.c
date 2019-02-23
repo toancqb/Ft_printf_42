@@ -32,7 +32,7 @@ void processing(t_env *vn, va_list args, int *i)
 	else if (vn->conv == 'f')
 		print_f(vn, args, i);
 	else if (vn->conv == '%')
-		print_percent(i);
+		print_percent(vn, i);
 }
 
 void ft_test(t_env *vn, int len) // test func

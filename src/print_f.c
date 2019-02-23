@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_f.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/23 17:41:44 by qtran             #+#    #+#             */
+/*   Updated: 2019/02/23 17:41:46 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 double pow_i(double f, int precision)
@@ -39,6 +51,7 @@ void get_float_width_precision(double f, int w, int p, char **str)
   int c;
 
   c = 0;
+  (void)w;
   len = get_len_double(f, p);
   d = (intmax_t)pow_i(f, p);
   *str = (char*)malloc(sizeof(char) * (len + 2));
@@ -65,7 +78,7 @@ void get_float_width_precision(double f, int w, int p, char **str)
   }
 }
 
-void flag_f(t_env *vn, double f, int *i, char **str)
+void flag_f(t_env *vn, double f, char **str)
 {
   int len;
   char c;
@@ -75,7 +88,7 @@ void flag_f(t_env *vn, double f, int *i, char **str)
   len = get_len_double(f, vn->precision);
   if (vn->precision)
     len++;
-  if (vn->width > len) // extra a 0 if flag - and precision = 0
+  if (vn->width > len)
   {
     len = vn->width - len;
     if (vn->minus == 1)
@@ -104,6 +117,7 @@ void print_f(t_env *vn, va_list args, int *i)
   double f;
   char *buffer;
 
+  f = 0.0;
   if (vn->conv_type == NULL)
     f = va_arg(args, double);
   else if (!ft_strcmp(vn->conv_type, "L"))
@@ -115,7 +129,7 @@ void print_f(t_env *vn, va_list args, int *i)
     pad_right(&buffer, 1, '+');
   else if (f > 0 && vn->space)
     pad_right(&buffer, 1, ' ');
-  flag_f(vn, f, i, &buffer);
+  flag_f(vn, f, &buffer);
   ft_putstr(buffer);
   *i += ft_strlen(buffer);
   free(buffer);
