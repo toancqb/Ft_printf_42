@@ -45,7 +45,6 @@ t_env *init_env(); void test_display_env(t_env *vn); //
 char *ft_strnew_filled_char(int len, char c);
 void flag_sc(t_env *vn, char **str);
 void flag_unsigned_nbr(t_env *vn, char **buffer);
-void sharp_xXo(char *str1, char **str2);
 void pad_left(char **buffer, int len, char c);
 void pad_right(char **bufer, int len, char c);
 t_bool is_flag(char c);

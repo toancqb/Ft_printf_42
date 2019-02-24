@@ -19,21 +19,28 @@ void sharp_xX(t_env *vn, char **buffer)
 
   if (ft_strcmp(*buffer, "0"))
   {
-    len = ft_strlen(*buffer) - 2;
-		if (vn->width > len)
+    len = ft_strlen(*buffer);
+    vn->width -= 2;
+		if (vn->width > len && vn->zero)
 		{
-			if (vn->zero && !vn->point)
+			if (!vn->point)
 				pad_right(buffer, vn->width - len, '0');
-			else if (!vn->minus)
-				pad_right(buffer, vn->width - len, ' ');
-			else if (vn->minus)
-				pad_left(buffer, vn->width - len, ' ');
+      tmp = *buffer;
+    	*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
+      free(tmp);
 		}
-		tmp = *buffer;
-		*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
-    free(tmp);
+    else
+    {
+      tmp = *buffer;
+  		*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
+      free(tmp);
+      if (vn->minus)
+				pad_left(buffer, vn->width - len, ' ');
+			else
+				pad_right(buffer, vn->width - len, ' ');
+    }
   }
-	else
+	else if (vn->width || vn->point)
 	{
 		free(*buffer);
 		*buffer = ft_strdup("");

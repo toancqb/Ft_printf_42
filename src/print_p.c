@@ -12,6 +12,18 @@
 
 #include "../includes/ft_printf.h"
 
+void sharp_p(char *str1, char **str2)
+{
+  char *tmp;
+
+  tmp = *str2;
+  if (ft_strcmp(*str2, "0"))
+  {
+    *str2 = ft_strjoin(str1, tmp);
+    free(tmp);
+  }
+}
+
 void print_p(t_env *vn, va_list args, int *i)
 {
 	char *buffer;
@@ -20,7 +32,7 @@ void print_p(t_env *vn, va_list args, int *i)
 	(void)vn;
 	d = va_arg(args, uintmax_t);
 	intdec_to_hex('x', d, &buffer);
-	sharp_xXo("0x", &buffer);
+	sharp_p("0x", &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
 	free(buffer);

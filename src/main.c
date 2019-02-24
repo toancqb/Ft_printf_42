@@ -21,11 +21,15 @@ printf("\n----------\n");
 
 	ft_printf("@moulitest: %5.x %5.0x\n", 0, 0);
 	printf("@moulitest: %5.x %5.0x", 0, 0);
-
+printf("\n----------\n");
+	ft_printf("@moulitest: %.10o\n", 42);
+	printf("@moulitest: %.10o", 42);
 printf("\n----------\n");
 
-	ft_printf("%#04x\n", 42);
-	printf("%#04x", 42);
+	ft_printf("%#010x\n", 42);
+	printf("%#010x\n", 42);
+	ft_printf("%#10x\n", 42);
+	printf("%#10x\n", 42);
 
 printf("\n----------\n");
 
