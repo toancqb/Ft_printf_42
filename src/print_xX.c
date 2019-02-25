@@ -12,50 +12,56 @@
 
 #include "../includes/ft_printf.h"
 
+void sharping(char c, char **buffer)
+{
+	char *tmp;
+
+	tmp = *buffer;
+	*buffer = (c == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
+	free(tmp);
+}
+
 void sharp_xX(t_env *vn, char **buffer)
 {
-  char *tmp;
-	int len;
+  int len;
 
   if (ft_strcmp(*buffer, "0"))
   {
     len = ft_strlen(*buffer);
     vn->width -= 2;
-		if (vn->width > len && vn->zero)
-		{
-			if (!vn->point)
-				pad_right(buffer, vn->width - len, '0');
-      tmp = *buffer;
-    	*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
-      free(tmp);
-		}
-    else
-    {
-      tmp = *buffer;
-  		*buffer = (vn->conv == 'x') ? ft_strjoin("0x", tmp) : ft_strjoin("0X", tmp);
-      free(tmp);
-      if (vn->minus)
-				pad_left(buffer, vn->width - len, ' ');
-			else
-				pad_right(buffer, vn->width - len, ' ');
-    }
-  }
-	else if (vn->width || vn->point)
+	if (vn->width > len && vn->zero)
 	{
-		free(*buffer);
-		*buffer = ft_strdup("");
+		if (!vn->point)
+			pad_right(buffer, vn->width - len, '0');
+    	sharping(vn->conv, buffer);
 	}
+    else if (vn->width > len)
+    {
+    	sharping(vn->conv, buffer);
+      	if (vn->minus)
+			pad_left(buffer, vn->width - len, ' ');
+		else
+			pad_right(buffer, vn->width - len, ' ');
+    }
+    else
+    	sharping(vn->conv, buffer);
+  }
+  else if (vn->width || vn->point)
+  {
+	free(*buffer);
+	*buffer = ft_strdup("");
+  }
 }
 
 void flag_x(t_env *vn, char **buffer)
 {
 	int len;
 
-	if (!ft_strcmp(*buffer, "0"))
+	/*if (!ft_strcmp(*buffer, "0"))
 	{
 		free(*buffer);
 		*buffer = ft_strdup("");
-	}
+	}*/
 	len = ft_strlen(*buffer);
 	if (vn->width > len)
 	{

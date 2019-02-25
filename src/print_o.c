@@ -47,6 +47,9 @@ void flag_unsigned_nbr(t_env *vn, char **buffer)
 	int len;
 
 	len = ft_strlen(*buffer);
+	if (vn->precision > len)
+		pad_right(buffer, vn->precision - len, '0');
+	len = ft_strlen(*buffer);
 	if (vn->width > len)
 	{
 		if (vn->zero && !vn->point)
@@ -67,8 +70,8 @@ void print_o(t_env *vn, va_list args, int *i)
 	intdec_to_oct(d, &buffer);
 	if (vn->sharp)
 		sharp_o(vn, &buffer);
-  else
-    flag_unsigned_nbr(vn, &buffer);
+  	else
+   		flag_unsigned_nbr(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
 	free(buffer);
@@ -80,7 +83,8 @@ void print_percent(t_env *vn, int *i)
 
 		buffer = ft_strnew(1);
 		buffer[0] = '%';
-		flag_sc(vn, &buffer);
+		(void)vn;
+		//flag_sc(vn, &buffer);
 		ft_putstr(buffer);
 		*i += ft_strlen(buffer);
 }

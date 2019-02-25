@@ -12,8 +12,11 @@
 
 #include "../includes/ft_printf.h"
 
-int main(void)
+void ft_test1()
 {
+	char *str;
+	int i,j;
+
 	ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
 	printf("@moulitest: %#.x %#.0x", 0, 0);
 
@@ -48,8 +51,27 @@ printf("\n----------\n");
 
 printf("\n----------\n");
 
-
+str = NULL;
+	i = ft_printf("%s\n", str);
+	j = printf("%s\n", str);
+	printf("--ft %d-==-%d\n", i, j);
 
 printf("\n----------\n");
+}
+
+void ft_test2()
+{
+	int i,j;
+
+	i = ft_printf("%03d\n", -1);
+	j = printf("%03d\n", -1);
+	printf("--ft %d==%d\n", i, j);
+
+
+}
+
+int main(void)
+{
+	ft_test2();
 	return (0);
 }

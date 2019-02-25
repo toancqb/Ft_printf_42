@@ -47,6 +47,7 @@ void flag_sc(t_env *vn, char **str);
 void flag_unsigned_nbr(t_env *vn, char **buffer);
 void pad_left(char **buffer, int len, char c);
 void pad_right(char **bufer, int len, char c);
+void unsigning(char **buffer);
 t_bool is_flag(char c);
 t_bool is_width_precision(char c);
 t_bool is_conv_type(char c);

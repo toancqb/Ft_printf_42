@@ -18,7 +18,7 @@ void print_s(t_env *vn, va_list args, int *i)
 	char *tmp;
 
 	tmp = va_arg(args, char*);
-	buffer = ft_strdup(tmp);
+	buffer = (tmp != NULL) ? ft_strdup(tmp) : NULL;
 	flag_sc(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);

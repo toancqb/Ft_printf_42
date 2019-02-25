@@ -48,21 +48,31 @@ void pad_right(char **buffer, int width, char c)
   free(tmp[1]);
 }
 
+void unsigning(char **buffer)
+{
+  char *tmp;
+
+  tmp = *buffer;
+  *buffer = ft_strdup(++tmp);
+  free(--tmp);
+}
+
 void flag_sc(t_env *vn, char **str)
 {
 	char *tmp;
 	int len;
 	char c;
 
-	if (vn->precision && vn->precision < (int)ft_strlen(*str))
+  if ((*str) && vn->precision && vn->precision < (int)ft_strlen(*str))
 	{
 		tmp = ft_strdup(*str);
 		*str = ft_strsub(tmp, 0, vn->precision);
 		free(tmp);
 	}
 	c = ' ';
-	len = ft_strlen(*str);
-	if (vn->width > len)
+	if (*str)
+    len = ft_strlen(*str);
+	if ((*str) && vn->width > len)
 	{
 		len = vn->width - len;
 		if (!vn->minus)
@@ -70,4 +80,6 @@ void flag_sc(t_env *vn, char **str)
 		else
 			pad_left(str, len, c);
 	}
+  if (!(*str))
+    *str = ft_strdup("(null)");
 }
