@@ -6,13 +6,13 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:42:48 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/23 17:42:50 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 16:08:04 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void sharping(char c, char **buffer)
+void	sharping(char c, char **buffer)
 {
 	char *tmp;
 
@@ -21,52 +21,42 @@ void sharping(char c, char **buffer)
 	free(tmp);
 }
 
-void sharp_xX(t_env *vn, char **buffer)
-{
-  int len;
-
-  if (ft_strcmp(*buffer, "0"))
-  {
-    len = ft_strlen(*buffer);
-    vn->width -= 2;
-	if (vn->width > len && vn->zero)
-	{
-		if (!vn->point)
-			pad_right(buffer, vn->width - len, '0');
-    	sharping(vn->conv, buffer);
-	}
-    else if (vn->width > len)
-    {
-    	sharping(vn->conv, buffer);
-      	if (vn->minus)
-			pad_left(buffer, vn->width - len, ' ');
-		else
-			pad_right(buffer, vn->width - len, ' ');
-    }
-    else
-    	sharping(vn->conv, buffer);
-  }
-  else if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
-  {
-	free(*buffer);
-	*buffer = ft_strdup("");
-  }
-}
-
-void flag_x(t_env *vn, char **buffer)
+void	sharp_x(t_env *vn, char **buffer)
 {
 	int len;
 
-	/*if (!ft_strcmp(*buffer, "0"))
+	if (ft_strcmp(*buffer, "0"))
+	{
+		len = ft_strlen(*buffer);
+		vn->width -= 2;
+		if (vn->width > len && vn->zero)
+		{
+			if (!vn->point)
+				pad_right(buffer, vn->width - len, '0');
+			sharping(vn->conv, buffer);
+		}
+		else if (vn->width > len)
+		{
+			sharping(vn->conv, buffer);
+			(vn->minus) ? pad_left(buffer, vn->width - len, ' ') :
+				pad_right(buffer, vn->width - len, ' ');
+		}
+		else
+			sharping(vn->conv, buffer);
+	}
+	else if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
+		ft_clr(buffer);
+}
+
+void	flag_x(t_env *vn, char **buffer)
+{
+	int	len;
+
+	if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
 	{
 		free(*buffer);
 		*buffer = ft_strdup("");
-	}*/
-	if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
-  	{
-		free(*buffer);
-		*buffer = ft_strdup("");
- 	}
+	}
 	len = ft_strlen(*buffer);
 	if (vn->width > len)
 	{
@@ -79,10 +69,10 @@ void flag_x(t_env *vn, char **buffer)
 	}
 }
 
-void cut_to_default_size(char *c, char **buffer)
+void	cut_to_default_size(char *c, char **buffer)
 {
-	char *tmp;
-	int len;
+	char	*tmp;
+	int		len;
 
 	len = ft_strlen(*buffer);
 	if (c == NULL && len > DEF_SZ_X)
@@ -92,10 +82,10 @@ void cut_to_default_size(char *c, char **buffer)
 	}
 }
 
-void print_xX(t_env *vn, va_list args, int *i)
+void	print_x(t_env *vn, va_list args, int *i)
 {
-	char *buffer;
-	uintmax_t d;
+	char		*buffer;
+	uintmax_t	d;
 
 	d = va_arg(args, uintmax_t);
 	if (vn->conv_type == NULL)
@@ -110,10 +100,8 @@ void print_xX(t_env *vn, va_list args, int *i)
 		d = (unsigned char)d;
 	intdec_to_hex(vn->conv, d, &buffer);
 	cut_to_default_size(vn->conv_type, &buffer);
-	//if (vn->sharp)
-	//	vn->conv == 'x' ? sharp_xX("0x", &buffer) : sharp_xX("0X", &buffer);
 	if (vn->sharp)
-		sharp_xX(vn, &buffer);
+		sharp_x(vn, &buffer);
 	else
 		flag_x(vn, &buffer);
 	ft_putstr(buffer);

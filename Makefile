@@ -6,12 +6,9 @@
 #    By: qtran <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/10 15:38:41 by qtran             #+#    #+#              #
-#    Updated: 2019/02/10 15:38:45 by qtran            ###   ########.fr        #
+#    Updated: 2019/02/26 16:04:20 by qtran            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#all:
-#	gcc src/main.c src/ft_*.c src/print*.c libft/libft.a -o ft_printf
 
 C = clang
 
@@ -33,7 +30,7 @@ SOURCES = ft_printf.c \
 			ft_env.c \
 			ft_flag.c \
 			ft_nbr.c \
-			main.c \
+			ft_tools.c \
 			print_c.c \
 			print_d.c \
 			print_f.c \
@@ -41,7 +38,7 @@ SOURCES = ft_printf.c \
 			print_p.c \
 			print_s.c \
 			print_u.c \
-			print_xX.c \
+			print_x.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

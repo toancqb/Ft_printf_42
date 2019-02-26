@@ -6,7 +6,7 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:49:03 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/02 23:28:56 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:25:44 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ typedef struct	s_list
 }				t_list;
 
 t_list			*ft_stack_init_elem(void const *content, size_t content_size);
-t_list	*ft_stack_init_elem2(void const *content, size_t content_size
+t_list			*ft_stack_init_elem2(void const *content, size_t content_size
 	, unsigned char isf);
 int				ft_stack_is_empty(t_list *st);
 size_t			ft_stack_num_elem(t_list *st);
 void			ft_stack_clr(t_list **st);
 void			ft_stack_push(t_list **st, t_list *new_elem);
 void			*ft_stack_pop(t_list **st);
-t_list			*ft_queue_init_elem(void const *content, size_t content_size); //
-t_list	*ft_queue_init_elem2(void const *content, size_t content_size
-	, unsigned char isf);
-int				ft_queue_is_empty(t_list *st); //
-void			ft_queue_clr(t_list **st); //
-size_t			ft_queue_num_elem(t_list *st); //
-void			ft_queue_push(t_list **st, t_list *new_elem); //
-void			*ft_queue_pop(t_list **st); //
+t_list			*ft_queue_init_elem(void const *content, size_t content_size);
+t_list			*ft_queue_init_elem2(void const *content,
+		size_t content_size, unsigned char isf);
+int				ft_queue_is_empty(t_list *st);
+void			ft_queue_clr(t_list **st);
+size_t			ft_queue_num_elem(t_list *st);
+void			ft_queue_push(t_list **st, t_list *new_elem);
+void			*ft_queue_pop(t_list **st);
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstadd(t_list **lst, t_list *new_elem);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));

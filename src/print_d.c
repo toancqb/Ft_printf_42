@@ -6,52 +6,16 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:41:36 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/23 17:41:38 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 15:03:30 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_nbr_len_intmax(intmax_t d)
+void	ft_intmax_neg(char **buffer, intmax_t n)
 {
-	int len;
-
-	len = 0;
-	if (d < 0)
-		len++;
-	if (d == 0)
-		return (1);
-	while (d != 0)
-	{
-		len++;
-		d = d / 10;
-	}
-	return (len);
-}
-
-void	ft_putnbr_to_buf_intmax(char **buffer, intmax_t n, int index)
-{
-	intmax_t		lli;
-
-	lli = n;
-	if (lli < 0)
-	{
-		(*buffer)[0] = '-';
-		lli = -lli;
-	}
-	if (lli > 9)
-	{
-		ft_putnbr_to_buf_intmax(buffer, lli / 10, index - 1);
-		(*buffer)[index] = (lli % 10) + '0';
-	}
-	else
-		(*buffer)[index] = lli + '0';
-}
-
-void ft_intmax_neg(char **buffer, intmax_t n)
-{
-	char *tmp;
-	intmax_t m;
+	char		*tmp;
+	intmax_t	m;
 
 	m = INT64_MIN;
 	if (n == m)
@@ -62,11 +26,11 @@ void ft_intmax_neg(char **buffer, intmax_t n)
 	}
 }
 
-void d_precision(t_env *vn, int d_pos, char **buffer)
+void	d_precision(t_env *vn, int d_pos, char **buffer)
 {
-	char *tmp;
-	char c;
-	int len;
+	char	*tmp;
+	char	c;
+	int		len;
 
 	if (vn->point && !vn->precision && !ft_strcmp(*buffer, "0"))
 	{
@@ -79,22 +43,16 @@ void d_precision(t_env *vn, int d_pos, char **buffer)
 	c = (d_pos == 1) ? '+' : '-';
 	len = ft_strlen(*buffer);
 	if (vn->precision > len)
-	{
 		pad_right(buffer, vn->precision - len, '0');
-    }
-    if (vn->plus)
-	{
+	if (vn->plus)
 		pad_right(buffer, 1, c);
-	}
 	else if (d_pos == 0)
 		pad_right(buffer, 1, c);
 	else if (vn->space && c == '+')
-	{
 		pad_right(buffer, 1, ' ');
-	}
 }
 
-void d_width(t_env *vn, int d_pos, char **buffer)
+void	d_width(t_env *vn, int d_pos, char **buffer)
 {
 	int len;
 	int check;
@@ -117,25 +75,19 @@ void d_width(t_env *vn, int d_pos, char **buffer)
 			pad_left(buffer, vn->width - len, ' ');
 	}
 	if (check == 1)
-	{
-		if (d_pos == 1)
-			pad_right(buffer, 1, '+');
-		else
-			pad_right(buffer, 1, '-');
-	}
+		(d_pos == 1) ? pad_right(buffer, 1, '+') : pad_right(buffer, 1, '-');
 }
 
-void flag_d(t_env *vn, int d_pos, char **buffer)
+void	flag_d(t_env *vn, int d_pos, char **buffer)
 {
 	d_precision(vn, d_pos, buffer);
 	d_width(vn, d_pos, buffer);
 }
 
-void print_d(t_env *vn, va_list args, int *i)
+void	print_d(t_env *vn, va_list args, int *i)
 {
-	intmax_t d;
-	char *buffer;
-	int len;
+	intmax_t	d;
+	char		*buffer;
 
 	d = va_arg(args, intmax_t);
 	if (vn->conv_type == NULL)
@@ -150,13 +102,10 @@ void print_d(t_env *vn, va_list args, int *i)
 		d = (short)d;
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (signed char)d;
-	len = ft_nbr_len_intmax(d);
-	buffer = (char*)malloc(sizeof(char) * (len + 1));
-	buffer[len] = '\0';
-	if (d == INT64_MIN)
-		ft_intmax_neg(&buffer, d);
-	else
-		ft_putnbr_to_buf_intmax(&buffer, d, len - 1);
+	buffer = (char*)malloc(sizeof(char) * (ft_nbr_len_intmax(d) + 1));
+	buffer[ft_nbr_len_intmax(d)] = '\0';
+	(d == INT64_MIN) ? ft_intmax_neg(&buffer, d)
+		: ft_putnbr_to_buf_intmax(&buffer, d, ft_nbr_len_intmax(d) - 1);
 	flag_d(vn, (int)(d >= 0), &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);

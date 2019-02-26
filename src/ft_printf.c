@@ -6,16 +6,16 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 15:39:06 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/10 15:39:08 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:55:58 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_printf(char *format, ...)
+int		ft_printf(char *format, ...)
 {
-	va_list args;
-	int count_printed;
+	va_list	args;
+	int		count_printed;
 
 	count_printed = 0;
 	va_start(args, format);
