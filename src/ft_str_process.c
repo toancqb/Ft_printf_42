@@ -16,7 +16,7 @@ t_bool is_conv(char c)
 {
 	char *s;
 
-	s = "cspdiouxXf%";
+	s = "cspdiouUxXf%";
 	while (*s)
 	{
 		if (c == *s)
@@ -103,7 +103,7 @@ t_bool set_conv_type(t_env *vn, char **fmt)
 	free(str);
 	str = ft_strsub(*fmt, 0, 1);
 	if (!ft_strcmp(str, "l") || !ft_strcmp(str, "L")
-		|| !ft_strcmp(str, "h"))
+		|| !ft_strcmp(str, "h") || !ft_strcmp(str, "j") || !ft_strcmp(str, "z"))
 	{
 		vn->conv_type = str;
 		*fmt += ft_strlen(vn->conv_type);

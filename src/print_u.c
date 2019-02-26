@@ -54,6 +54,8 @@ void print_uU(t_env *vn, va_list args, int *i)
 		d = (unsigned int)d;
 	else if (!ft_strcmp(vn->conv_type, "l"))
 		d = (unsigned long)d;
+	else if (!ft_strcmp(vn->conv_type, "j"))
+		d = (uintmax_t)d;
 	else if (!ft_strcmp(vn->conv_type, "ll"))
 		d = (unsigned long long)d;
 	else if (!ft_strcmp(vn->conv_type, "h"))

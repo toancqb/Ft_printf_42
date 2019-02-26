@@ -54,6 +54,6 @@ void test_display_env(t_env *vn) //
 
 void ft_error(char *str_error)
 {
-	perror(str_error);
+  ft_putstr(str_error);
 	exit(1);
 }

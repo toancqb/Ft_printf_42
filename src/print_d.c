@@ -48,81 +48,17 @@ void	ft_putnbr_to_buf_intmax(char **buffer, intmax_t n, int index)
 		(*buffer)[index] = lli + '0';
 }
 
-void flag_d_pos(t_env *vn, int d_pos, int len, char **buffer)
+void ft_intmax_neg(char **buffer, intmax_t n)
 {
-	d_pos = 0;
-	len = ft_strlen(*buffer);
-	if (vn->precision > len)
-	{
-		pad_right(buffer, vn->precision - len, '0');
-		if (vn->plus)
-		{
-			pad_right(buffer, 1, '+');
-			d_pos = 1;
-		}
-		else if (vn->space)
-		{
-			pad_right(buffer, 1, ' ');
-			d_pos = 1;
-		}
-    }
-	len = ft_strlen(*buffer);
-	if (vn->width > len)
-	{	
-		if (vn->zero && !vn->point)
-			pad_right(buffer, vn->width - len, '0');
-		else if (!vn->minus)
-			pad_right(buffer, vn->width - len, ' ');
-		else if (vn->minus)
-			pad_left(buffer, vn->width - len, ' ');
-	}
-	if (!d_pos)
-	{
-		if (vn->plus)
-			pad_right(buffer, 1, '+');
-		else if (vn->space)
-			pad_right(buffer, 1, ' ');
-	}
-}
+	char *tmp;
+	intmax_t m;
 
-void flag_d_neg(t_env *vn, int d_pos, int len, char **buffer)
-{
-	int check;
-
-	if (d_pos)
+	m = INT64_MIN;
+	if (n == m)
 	{
-		flag_d_pos(vn, d_pos, len, buffer);
-	}
-	else
-	{
-		check = 0;
-		len = ft_strlen(*buffer);
-		unsigning(buffer);
-		if (vn->precision > len - 1)
-			pad_right(buffer, vn->precision - len + 1, '0');
-		else
-		{
-			pad_right(buffer, 1, '-');
-			check = 1;
-		}
-		len = ft_strlen(*buffer);
-		vn->width -= (check == 0) ? 1 : 0;
-		if (vn->width > len)
-		{	
-			if (check)
-			{
-				unsigning(buffer);
-				check = 0;
-			}
-			if (vn->zero && !vn->point)
-				pad_right(buffer, vn->width - len, '0');
-			else if (!vn->minus)
-				pad_right(buffer, vn->width - len, ' ');
-			else if (vn->minus)
-				pad_left(buffer, vn->width - len, ' ');
-		}		
-		if (!check)
-			pad_right(buffer, 1, '-');
+		tmp = *buffer;
+		*buffer = ft_strdup("-9223372036854775808");
+		free(tmp);
 	}
 }
 
@@ -144,7 +80,7 @@ void d_precision(t_env *vn, int d_pos, char **buffer)
 	len = ft_strlen(*buffer);
 	if (vn->precision > len)
 	{
-		pad_right(buffer, vn->precision - len, '0');		
+		pad_right(buffer, vn->precision - len, '0');
     }
     if (vn->plus)
 	{
@@ -172,7 +108,7 @@ void d_width(t_env *vn, int d_pos, char **buffer)
 	}
 	len = ft_strlen(*buffer);
 	if (vn->width > len)
-	{	
+	{
 		if (vn->zero && !vn->point)
 			pad_right(buffer, vn->width - len, '0');
 		else if (!vn->minus)
@@ -204,8 +140,10 @@ void print_d(t_env *vn, va_list args, int *i)
 	d = va_arg(args, intmax_t);
 	if (vn->conv_type == NULL)
 		d = (int)d;
-	else if (!ft_strcmp(vn->conv_type, "l"))
+	else if (!ft_strcmp(vn->conv_type, "l") || !ft_strcmp(vn->conv_type, "z"))
 		d = (long)d;
+	else if (!ft_strcmp(vn->conv_type, "j"))
+		d = (intmax_t)d;
 	else if (!ft_strcmp(vn->conv_type, "ll"))
 		d = (long long)d;
 	else if (!ft_strcmp(vn->conv_type, "h"))
@@ -215,8 +153,10 @@ void print_d(t_env *vn, va_list args, int *i)
 	len = ft_nbr_len_intmax(d);
 	buffer = (char*)malloc(sizeof(char) * (len + 1));
 	buffer[len] = '\0';
-	ft_putnbr_to_buf_intmax(&buffer, d, len - 1);
-	//flag_d(vn, (int)(d >= 0), len, &buffer);
+	if (d == INT64_MIN)
+		ft_intmax_neg(&buffer, d);
+	else
+		ft_putnbr_to_buf_intmax(&buffer, d, len - 1);
 	flag_d(vn, (int)(d >= 0), &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);

@@ -18,11 +18,18 @@
 # include <stdio.h>
 # include <inttypes.h>
 # include "../libft/libft.h"
+# define DEF_SZ_X 8
 
 typedef unsigned char t_bool;
 /*
- * //<-----    0x000000a2c instead of 00000xa2c
- *  return value
+ *
+ * ft_printf("%lld", -9223372036854775808);
+ *  1. (    1) -->-<--
+ *  2. (   20) -->-9223372036854775808<--
+ *
+ *ft_printf("%jd", -9223372036854775808);
+ *  1. (    1) -->-<--
+ *  2. (   20) -->-9223372036854775808<--
  *
  */
 typedef struct s_env

@@ -91,7 +91,7 @@ void print_percent(t_env *vn, int *i)
 		buffer = ft_strnew(1);
 		buffer[0] = '%';
 		(void)vn;
-		//flag_sc(vn, &buffer);
+		flag_sc(vn, &buffer);
 		ft_putstr(buffer);
 		*i += ft_strlen(buffer);
 }

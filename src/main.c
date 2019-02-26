@@ -52,7 +52,7 @@ printf("\n----------\n");
 printf("\n----------\n");
 
 str = NULL;
-	i = ft_printf("%s\n", str);
+	i = ft_printf("%\n", str);
 	j = printf("%s\n", str);
 	printf("--ft %d-==-%d\n", i, j);
 
@@ -61,23 +61,13 @@ printf("\n----------\n");
 
 void ft_test2()
 {
-	int i,j;
+	/*int i,j;
 
-	i = ft_printf("%+5.d\n", 0);
-	j = printf("%+5.d\n", 0);
-	printf("--ft %d==%d\n", i, j);
-	i = ft_printf("%0+5d\n", -42);
-	j = printf("%0+5d\n", -42);
-	printf("--ft %d==%d\n", i, j);
-	i = ft_printf("%05d\n", -42);
-	j = printf("%05d\n", -42);
-	printf("--ft %d==%d\n", i, j);
-	i = ft_printf("%03d\n", 0);
-	j = printf("%03d\n", 0);
-	printf("--ft %d==%d\n", i, j);
-	i = ft_printf("%03d\n", 1);
-	j = printf("%03d\n", 1);
-	printf("--ft %d==%d\n", i, j);
+	i = ft_printf("%lld\n", (long long)(-9223372036854775808));
+	j = printf("%lld\n", (long long)(-9223372036854775808));
+	printf("--ft %d==%d\n", i, j);*/
+
+	//printf("%");
 
 }
 

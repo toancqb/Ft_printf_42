@@ -79,6 +79,19 @@ void flag_x(t_env *vn, char **buffer)
 	}
 }
 
+void cut_to_default_size(char *c, char **buffer)
+{
+	char *tmp;
+	int len;
+
+	len = ft_strlen(*buffer);
+	if (c == NULL && len > DEF_SZ_X)
+	{
+		tmp = *buffer;
+		*buffer = ft_strsub(tmp, len - DEF_SZ_X, DEF_SZ_X);
+	}
+}
+
 void print_xX(t_env *vn, va_list args, int *i)
 {
 	char *buffer;
@@ -96,6 +109,7 @@ void print_xX(t_env *vn, va_list args, int *i)
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (unsigned char)d;
 	intdec_to_hex(vn->conv, d, &buffer);
+	cut_to_default_size(vn->conv_type, &buffer);
 	//if (vn->sharp)
 	//	vn->conv == 'x' ? sharp_xX("0x", &buffer) : sharp_xX("0X", &buffer);
 	if (vn->sharp)

@@ -21,4 +21,7 @@ void print_c(t_env *vn, va_list args, int *i)
 	flag_sc(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);
+	if (buffer[0] == '\0')
+		(*i)++;
+	free(buffer);
 }
