@@ -45,7 +45,14 @@ void sharp_o(t_env *vn, char **buffer)
 void flag_unsigned_nbr(t_env *vn, char **buffer)
 {
 	int len;
+	char *tmp;
 
+	if (vn->point && !vn->precision && !ft_strcmp(*buffer, "0"))
+	{
+		tmp = *buffer;
+		*buffer = ft_strdup("");
+		free(tmp);
+	}
 	len = ft_strlen(*buffer);
 	if (vn->precision > len)
 		pad_right(buffer, vn->precision - len, '0');

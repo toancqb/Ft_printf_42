@@ -46,7 +46,7 @@ void sharp_xX(t_env *vn, char **buffer)
     else
     	sharping(vn->conv, buffer);
   }
-  else if (vn->width || vn->point)
+  else if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
   {
 	free(*buffer);
 	*buffer = ft_strdup("");
@@ -62,6 +62,11 @@ void flag_x(t_env *vn, char **buffer)
 		free(*buffer);
 		*buffer = ft_strdup("");
 	}*/
+	if (!ft_strcmp(*buffer, "0") && (!vn->precision && vn->point))
+  	{
+		free(*buffer);
+		*buffer = ft_strdup("");
+ 	}
 	len = ft_strlen(*buffer);
 	if (vn->width > len)
 	{

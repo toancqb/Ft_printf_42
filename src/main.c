@@ -63,10 +63,21 @@ void ft_test2()
 {
 	int i,j;
 
-	i = ft_printf("%03d\n", -1);
-	j = printf("%03d\n", -1);
+	i = ft_printf("%+5.d\n", 0);
+	j = printf("%+5.d\n", 0);
 	printf("--ft %d==%d\n", i, j);
-
+	i = ft_printf("%0+5d\n", -42);
+	j = printf("%0+5d\n", -42);
+	printf("--ft %d==%d\n", i, j);
+	i = ft_printf("%05d\n", -42);
+	j = printf("%05d\n", -42);
+	printf("--ft %d==%d\n", i, j);
+	i = ft_printf("%03d\n", 0);
+	j = printf("%03d\n", 0);
+	printf("--ft %d==%d\n", i, j);
+	i = ft_printf("%03d\n", 1);
+	j = printf("%03d\n", 1);
+	printf("--ft %d==%d\n", i, j);
 
 }
 

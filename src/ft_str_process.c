@@ -55,6 +55,7 @@ void set_width_precision(t_env *vn, char **fmt)
 		vn->point = 1;
 		tmp++;
 		vn->precision = ft_atoi(tmp);
+		vn->zero = 0; //
 	}
 	else
 		vn->precision = 0;
