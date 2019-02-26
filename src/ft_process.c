@@ -58,4 +58,7 @@ void	process_main(char **fmt_ptr, va_list args, int *c_printed_ptr)
 		ft_error("invalid conversion");
 	processing(vn, args, c_printed_ptr);
 	*fmt_ptr += len + 1;
+	if (vn->conv_type)
+		free(vn->conv_type);
+	free(vn);
 }

@@ -14,10 +14,9 @@
 
 void	sharp_o(t_env *vn, char **buffer)
 {
-	char	*tmp;
 	int		len;
 
-	if (ft_strcmp(*buffer, "0"))
+	if (*buffer && ft_strcmp(*buffer, "0"))
 	{
 		len = ft_strlen(*buffer);
 		vn->width -= 1;
@@ -25,15 +24,11 @@ void	sharp_o(t_env *vn, char **buffer)
 		{
 			if (!vn->point)
 				pad_right(buffer, vn->width - len, '0');
-			tmp = *buffer;
-			*buffer = ft_strjoin("0", tmp);
-			free(tmp);
+			pad_right(buffer, 1, '0');
 		}
 		else
 		{
-			tmp = *buffer;
-			*buffer = ft_strjoin("0", tmp);
-			free(tmp);
+			pad_right(buffer, 1, '0');
 			(vn->minus) ? pad_left(buffer, vn->width - len, ' ') :
 				pad_right(buffer, vn->width - len, ' ');
 		}

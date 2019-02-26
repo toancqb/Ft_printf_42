@@ -18,7 +18,7 @@ t_env		*init_env(void)
 
 	vn = (t_env*)malloc(sizeof(t_env));
 	vn->conv = 0;
-	vn->conv_type = "";
+	vn->conv_type = NULL;
 	vn->width = 0;
 	vn->precision = 0;
 	vn->sharp = 0;
@@ -85,5 +85,5 @@ void		set_conv(t_env *vn, char c)
 void		ft_error(char *str_error)
 {
 	ft_putstr(str_error);
-	exit(1);
+	return ;
 }
