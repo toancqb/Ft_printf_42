@@ -12,62 +12,14 @@
 
 #include "../includes/ft_printf.h"
 
-void ft_test1()
-{
-	char *str;
-	int i,j;
-
-	ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
-	printf("@moulitest: %#.x %#.0x", 0, 0);
-
-printf("\n----------\n");
-
-	ft_printf("@moulitest: %5.x %5.0x\n", 0, 0);
-	printf("@moulitest: %5.x %5.0x", 0, 0);
-printf("\n----------\n");
-	ft_printf("@moulitest: %.10o\n", 42);
-	printf("@moulitest: %.10o", 42);
-printf("\n----------\n");
-
-	ft_printf("%#010x\n", 42);
-	printf("%#010x\n", 42);
-	ft_printf("%#10x\n", 42);
-	printf("%#10x\n", 42);
-
-printf("\n----------\n");
-
-  ft_printf("%10s is a string\n", "this");
-	printf("%10s is a string", "this");
-
-printf("\n----------\n");
-
-	ft_printf("%10s is a string\n", "");
-	printf("%10s is a string", "");
-
-printf("\n----------\n");
-
-	//ft_printf("%lld\n", -9223372036854775808);
-	//printf("%lld\n", -9223372036854775808);
-
-printf("\n----------\n");
-
-str = NULL;
-	i = ft_printf("%\n", str);
-	j = printf("%s\n", str);
-	printf("--ft %d-==-%d\n", i, j);
-
-printf("\n----------\n");
-}
-
 void ft_test2()
 {
-	/*int i,j;
+	int i,j;
 
-	i = ft_printf("%lld\n", (long long)(-9223372036854775808));
-	j = printf("%lld\n", (long long)(-9223372036854775808));
-	printf("--ft %d==%d\n", i, j);*/
-
-	//printf("%");
+	i = ft_printf("%#o", 42);
+	printf("\n");
+	j = printf("%#o", 42);
+	printf("\n--ft %d==%d\n", i, j);
 
 }
 

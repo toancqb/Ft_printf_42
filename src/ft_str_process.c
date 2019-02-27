@@ -6,15 +6,15 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 20:54:29 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/10 20:54:48 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:57:41 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-t_bool is_conv(char c)
+t_bool	is_conv(char c)
 {
-	char *s;
+	char	*s;
 
 	s = "cspdiouUxXf%";
 	while (*s)
@@ -26,9 +26,9 @@ t_bool is_conv(char c)
 	return (0);
 }
 
-t_bool is_flag(char c)
+t_bool	is_flag(char c)
 {
-	char *s;
+	char	*s;
 
 	s = "-+#0 ";
 	while (*s)
@@ -40,14 +40,14 @@ t_bool is_flag(char c)
 	return (0);
 }
 
-t_bool is_width_precision(char c)
+t_bool	is_width_precision(char c)
 {
 	return (ft_isdigit(c) || (t_bool)(c == '.'));
 }
 
-void set_width_precision(t_env *vn, char **fmt)
+void	set_width_precision(t_env *vn, char **fmt)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_strchr(*fmt, '.');
 	if (tmp)
@@ -55,7 +55,7 @@ void set_width_precision(t_env *vn, char **fmt)
 		vn->point = 1;
 		tmp++;
 		vn->precision = ft_atoi(tmp);
-		vn->zero = 0; //
+		vn->zero = 0;
 	}
 	else
 		vn->precision = 0;
@@ -66,55 +66,4 @@ void set_width_precision(t_env *vn, char **fmt)
 		tmp++;
 	}
 	*fmt = tmp;
-}
-
-void set_flag(t_env *vn, char c)
-{
-	if (c == '-')
-	{
-		vn->minus = 1;
-		vn->zero = 0;
-	}
-	if (c == ' ')
-		vn->space = 1;
-	if (c == '#')
-		vn->sharp = 1;
-	if (c == '0' && vn->minus == 0)
-		vn->zero = 1;
-	if (c == '+')
-	{
-		vn->plus = 1;
-		if (vn->conv == 'd' || vn->conv == 'f')
-			vn->space = 0;
-	}
-}
-
-t_bool set_conv_type(t_env *vn, char **fmt)
-{
-	char *str;
-
-	str = ft_strsub(*fmt, 0, 2);
-	if (!ft_strcmp(str, "ll")	|| !ft_strcmp(str, "hh"))
-	{
-		vn->conv_type = str;
-		*fmt += ft_strlen(vn->conv_type);
-		return (1);
-	}
-	free(str);
-	str = ft_strsub(*fmt, 0, 1);
-	if (!ft_strcmp(str, "l") || !ft_strcmp(str, "L")
-		|| !ft_strcmp(str, "h") || !ft_strcmp(str, "j") || !ft_strcmp(str, "z"))
-	{
-		vn->conv_type = str;
-		*fmt += ft_strlen(vn->conv_type);
-		return (1);
-	}
-	free(str);
-	vn->conv_type = NULL;
-	return (0);
-}
-
-void set_conv(t_env *vn, char c)
-{
-	vn->conv = c;
 }

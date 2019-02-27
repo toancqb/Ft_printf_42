@@ -6,15 +6,15 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:42:41 by qtran             #+#    #+#             */
-/*   Updated: 2019/02/23 17:42:43 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 15:04:20 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_nbr_len_uintmax(uintmax_t d)
+int		ft_nbr_len_uintmax(uintmax_t d)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (d == 0)
@@ -41,14 +41,13 @@ void	ft_putnbr_to_buf_uintmax(char **buffer, uintmax_t n, int index)
 		(*buffer)[index] = lli + '0';
 }
 
-void print_uU(t_env *vn, va_list args, int *i)
+void	print_u(t_env *vn, va_list args, int *i)
 {
-	uintmax_t d;
-	char *buffer;
-	int len;
+	uintmax_t	d;
+	char		*buffer;
 
-  if (vn->conv == 'U')
-    vn->conv_type = ft_strdup("l");
+	if (vn->conv == 'U')
+		vn->conv_type = ft_strdup("l");
 	d = va_arg(args, uintmax_t);
 	if (vn->conv_type == NULL)
 		d = (unsigned int)d;
@@ -62,10 +61,9 @@ void print_uU(t_env *vn, va_list args, int *i)
 		d = (unsigned short)d;
 	else if (!ft_strcmp(vn->conv_type, "hh"))
 		d = (unsigned char)d;
-	len = ft_nbr_len_uintmax(d);
-	buffer = (char*)malloc(sizeof(char) * (len + 1));
-	buffer[len] = '\0';
-	ft_putnbr_to_buf_uintmax(&buffer, d, len - 1);
+	buffer = (char*)malloc(sizeof(char) * (ft_nbr_len_uintmax(d) + 1));
+	buffer[ft_nbr_len_uintmax(d)] = '\0';
+	ft_putnbr_to_buf_uintmax(&buffer, d, ft_nbr_len_uintmax(d) - 1);
 	flag_unsigned_nbr(vn, &buffer);
 	ft_putstr(buffer);
 	*i += ft_strlen(buffer);

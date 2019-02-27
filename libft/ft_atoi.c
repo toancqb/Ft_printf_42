@@ -6,7 +6,7 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 13:18:15 by qtran             #+#    #+#             */
-/*   Updated: 2017/11/15 16:27:20 by qtran            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:24:02 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_check_sign(const char *str, int *i, int *sign)
 		(*i)++;
 }
 
-int	ft_atoi(const char *str)
+int				ft_atoi(const char *str)
 {
 	int i;
 	int res;
